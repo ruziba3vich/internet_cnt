@@ -9,3 +9,7 @@ func isValidURL(input string) bool {
 	}
 	return true
 }
+
+func ParseURL(input string) (*url.URL, error) {
+	return url.Parse(input)
+}

@@ -1,17 +1,34 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+)
 
 func main() {
-	for {
-		var url string
-		fmt.Print("URL kiriting : ")
-		fmt.Scan(&url)
-		val := isValidURL(url)
-		if val {
-			fmt.Println("URL to'g'ri")
-		} else {
-			fmt.Println("to'g'ri URL")
-		}
+	url1 := "leetcode.com"
+	url2 := "robocontest.uzb"
+	Repr(url1)
+	Repr(url2)
+}
+
+func Repr(url string) {
+	if isValidURL(url) {
+		fmt.Println("given string is valid")
+	} else {
+		fmt.Println("given string is invalid")
 	}
+
+	result, err := ParseURL(url)
+	if err != nil {
+		fmt.Println("error :", err)
+		return
+	}
+
+	fmt.Printf(`
+	schema -> %s\nhost -> %s\npath -> %s\nparams of the query -> %s\nfragment -> %s
+	`, result.Scheme,
+		result.Host,
+		result.Path,
+		result.RawQuery,
+		result.Fragment)
 }
